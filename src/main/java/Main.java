@@ -41,7 +41,7 @@ public class Main {
 
     }
 
-    private static List<Employee> parseXML(String fileName)  {
+     static List<Employee> parseXML(String fileName)  {
         List<Employee> employees = new ArrayList<Employee>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
@@ -60,7 +60,7 @@ public class Main {
                     //  if(employee.getNodeName().equals("employee")){
                     //в список добавляем объекты класса  Employee
                     employees.add(
-                            new Employee(Long.parseLong(employee.getElementsByTagName("id").item(0).getTextContent()),
+                            new Employee(Integer.parseInt(employee.getElementsByTagName("id").item(0).getTextContent()),
                                     employee.getElementsByTagName("firstName").item(0).getTextContent(),
                                     employee.getElementsByTagName("lastName").item(0).getTextContent(),
                                     employee.getElementsByTagName("country").item(0).getTextContent(),
@@ -76,7 +76,7 @@ public class Main {
         return employees;
     }
 
-    private static void writeString(String json, String nameJsonFile) {
+     static void writeString(String json, String nameJsonFile) {
         try (FileWriter file = new FileWriter(nameJsonFile)) {
             file.write(json);
             file.flush();
@@ -85,7 +85,7 @@ public class Main {
         }
     }
 
-    private static String listToJson(List<Employee> list) {
+     static String listToJson(List<Employee> list) {
         Type listType = new TypeToken<List<Employee>>() {
         }.getType();
         GsonBuilder builder = new GsonBuilder();
@@ -95,7 +95,7 @@ public class Main {
         return json;
     }
 
-    private static List<Employee> parseCSV(String[] columnMapping, String fileName) {
+     static List<Employee> parseCSV(String[] columnMapping, String fileName) {
         List<Employee> employees = null;
         //поптыка чтения данных их data.csv
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
