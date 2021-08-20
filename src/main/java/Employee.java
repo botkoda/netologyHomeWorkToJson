@@ -1,11 +1,11 @@
 import java.util.Objects;
 
-public class Employee implements Comparable<Employee>{
-     int id;
-     String firstName;
-     String lastName;
-     String country;
-     int age;
+public class Employee implements Comparable<Employee> {
+    int id;
+    String firstName;
+    String lastName;
+    String country;
+    int age;
 
 
     public Employee() {
@@ -19,8 +19,6 @@ public class Employee implements Comparable<Employee>{
         this.country = country;
         this.age = age;
     }
-
-
 
 
     public int getId() {
@@ -78,10 +76,14 @@ public class Employee implements Comparable<Employee>{
 
     @Override
     public int compareTo(Employee e) {
-        String s1=""+id+firstName+lastName+age+country;
-        String s2=""+e.getId()+e.getFirstName()+e.getLastName()+e.getAge()+e.getCountry();
+        String s1 = "" + id + firstName + lastName + age + country;
+        String s2 = "" + e.getId() + e.getFirstName() + e.getLastName() + e.getAge() + e.getCountry();
         return s1.compareTo(s2);
     }
 
+    @Override
+    public String toString() {
+        return id + "," + firstName + "," + lastName + "," + country + "," + age;
 
+    }
 }
