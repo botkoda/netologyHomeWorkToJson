@@ -30,7 +30,8 @@ public class Main {
         //ЗАДАНИЕ1 csv в json
         List<Employee> list = parseCSV(columnMapping, fileName);
         String json = listToJson(list);
-        List<Employee> listJson = jsonToList(json);
+        jsonToList(json);
+        countEmployee(list);
         writeString(json, newJsonFile);
 
         //ЗАДАНИЕ2 xml в json
@@ -40,6 +41,10 @@ public class Main {
         writeString(json, newJsonFile);
 
 
+    }
+
+    static int countEmployee(List<Employee> list) {
+        return list.size();
     }
 
     static List<Employee> jsonToList(String jsonText) {
