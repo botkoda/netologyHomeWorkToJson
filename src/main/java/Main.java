@@ -30,6 +30,7 @@ public class Main {
         //ЗАДАНИЕ1 csv в json
         List<Employee> list = parseCSV(columnMapping, fileName);
         String json = listToJson(list);
+        List<Employee> listJson = jsonToList(json);
         writeString(json, newJsonFile);
 
         //ЗАДАНИЕ2 xml в json
@@ -41,7 +42,19 @@ public class Main {
 
     }
 
-     static List<Employee> parseXML(String fileName)  {
+    static List<Employee> jsonToList(String jsonText) {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        // List<Employee> employee=gson.fromJson(jsonText,List<Employee>);
+        Type listType = new TypeToken<ArrayList<Employee>>() {
+        }.getType();
+        List<Employee> employee = gson.fromJson(jsonText, listType);
+
+        return employee;
+
+    }
+
+    static List<Employee> parseXML(String fileName) {
         List<Employee> employees = new ArrayList<Employee>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
@@ -70,13 +83,13 @@ public class Main {
                     //  }
                 }
             }
-        } catch (SAXException |ParserConfigurationException | IOException e) {
+        } catch (SAXException | ParserConfigurationException | IOException e) {
             e.printStackTrace();
         }
         return employees;
     }
 
-     static void writeString(String json, String nameJsonFile) {
+    static void writeString(String json, String nameJsonFile) {
         try (FileWriter file = new FileWriter(nameJsonFile)) {
             file.write(json);
             file.flush();
@@ -85,7 +98,7 @@ public class Main {
         }
     }
 
-     static String listToJson(List<Employee> list) {
+    static String listToJson(List<Employee> list) {
         Type listType = new TypeToken<List<Employee>>() {
         }.getType();
         GsonBuilder builder = new GsonBuilder();
@@ -95,7 +108,7 @@ public class Main {
         return json;
     }
 
-     static List<Employee> parseCSV(String[] columnMapping, String fileName) {
+    static List<Employee> parseCSV(String[] columnMapping, String fileName) {
         List<Employee> employees = null;
         //поптыка чтения данных их data.csv
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {

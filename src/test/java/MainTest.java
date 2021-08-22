@@ -24,15 +24,12 @@ import java.util.List;
 
 
 public class MainTest {
-    List<Employee> employeeList;
+    List<Employee> employeeList = Arrays.asList(
+            new Employee(1, "John", "Smith", "USA", 25),
+            new Employee(2, "Inav", "Petrov", "RU", 23)
+    );
+    ;
 
-    @BeforeEach
-    public void initEmployeeList() {
-        employeeList = Arrays.asList(
-                new Employee(1, "John", "Smith", "USA", 25),
-                new Employee(2, "Inav", "Petrov", "RU", 23)
-        );
-    }
 
     @Test
     void parseXML() {
@@ -158,4 +155,10 @@ public class MainTest {
     }
 
 
+    @Test
+    void jsonToList() {
+        String json = "[{\"id\":1,\"firstName\":\"John\",\"lastName\":\"Smith\",\"country\":\"USA\",\"age\":25},{\"id\":2,\"firstName\":\"Inav\",\"lastName\":\"Petrov\",\"country\":\"RU\",\"age\":23}]";
+        List<Employee> result = Main.jsonToList(json);
+        assertEquals(employeeList, result);
+    }
 }
